@@ -1,24 +1,34 @@
-# Create docker file using : GO_VERSION=16.x.x-xxxx erb Dockerfile.gocd-agent.erb > Dockerfile.gocd-agent.out
-# Build using              : docker build -f Dockerfile.gocd-agent.out --tag=gocd-agent .
+from gocd/gocd-agent:16.2.1
+USER go
+RUN echo $PATH
+RUN curl -L -s get.jenv.io | bash && \
+    bash -c "source /var/go/.jenv/bin/jenv-init.sh && jenv repo update && jenv config auto true && jenv install java 1.8.0_71 && jenv install maven 3.3.9 && jenv clean"
 
-FROM phusion/baseimage:0.9.18
-MAINTAINER GoCD <go-cd-dev@googlegroups.com>
+ENV PATH=/var/go/.jenv/candidates/java/current/bin:/var/go/.jenv/candidates/maven/current/bin:$PATH
 
-RUN rm -rf /etc/service/sshd /etc/my_init.d/00_regen_ssh_host_keys.sh
-RUN apt-get update
-RUN apt-get upgrade -y
-RUN apt-get install -y -q unzip openjdk-8-jdk git mercurial subversion
+ENV SONAR_VERSION=2.6.1
+WORKDIR /var/go
 
-RUN mkdir /etc/service/go-agent
-ADD gocd-agent/go-agent-start.sh /etc/service/go-agent/run
+RUN curl --insecure -OL https://sonarsource.bintray.com/Distribution/sonar-scanner-cli/sonar-scanner-${SONAR_VERSION}.zip
+RUN unzip sonar-scanner-${SONAR_VERSION}.zip
+RUN rm sonar-scanner-${SONAR_VERSION}.zip
 
-ADD https://download.go.cd/binaries/16.2.1/deb/go-agent-16.2.1.deb /tmp/go-agent.deb
+ENV SONAR_RUNNER_HOME=/var/go/sonar-scanner-${SONAR_VERSION}
+ENV PATH $PATH:/var/go/sonar-scanner-${SONAR_VERSION}/bin
 
-WORKDIR /tmp
-RUN dpkg -i /tmp/go-agent.deb
-RUN sed -i -e 's/DAEMON=Y/DAEMON=N/' /etc/default/go-agent
+USER root
 
-RUN apt-get clean 
-RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+FROM registry.aliyuncs.com/leansw/go_agent16_2_1_java8
+ADD .ssh /var/go/.ssh
+RUN chown -R go:go /var/go/.ssh
+ADD settings.xml /etc/maven/settings.xml
+ADD settings.xml /usr/share/maven/conf/settings.xml
 
-CMD ["/sbin/my_init"]
+RUN mkdir -p /var/go/.m2 && mkdir -p /var/lib/go-agent/pipelines && chown go:go /var/go/.m2 && chown go:go /var/lib/go-agent/pipelines
+VOLUME ["/var/go/.m2","/var/lib/go-agent/pipelines"]
+RUN export SHELL=/bin/bash
+
+CMD bash -c "chown go:go /var/go/.m2 && chown go:go /var/lib/go-agent/pipelines && /sbin/my_init"
+
+
+
