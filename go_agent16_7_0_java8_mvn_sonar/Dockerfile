@@ -15,7 +15,7 @@ RUN unzip sonar-scanner-${SONAR_VERSION}.zip
 RUN rm sonar-scanner-${SONAR_VERSION}.zip
 
 ENV SONAR_RUNNER_HOME=/var/go/sonar-scanner-${SONAR_VERSION}
-ENV PATH $PATH:/var/go/sonar-scanner-${SONAR_VERSION}/bin
+ENV PATH=$PATH:/var/go/sonar-scanner-${SONAR_VERSION}/bin
 
 USER root
 RUN mkdir -p /var/go/.m2 && mkdir -p /var/lib/go-agent/pipelines && chown go:go /var/go/.m2 && chown go:go /var/lib/go-agent/pipelines
