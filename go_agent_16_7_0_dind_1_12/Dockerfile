@@ -9,7 +9,7 @@ RUN apk add --no-cache unzip openjdk7 git mercurial subversion dpkg
 RUN mkdir -p /etc/service/go-agent
 ADD gocd-agent/go-agent-start.sh /etc/service/go-agent/run
 
-ADD https://download.go.cd/binaries/<%= ENV['GO_VERSION'] %>/deb/go-agent_<%= ENV['GO_VERSION'] %>_all.deb /tmp/go-agent.deb
+ADD https://download.go.cd/binaries/16.7.0-3819/deb/go-agent_16.7.0-3819_all.deb /tmp/go-agent.deb
 
 WORKDIR /tmp
 RUN dpkg -i /tmp/go-agent.deb
