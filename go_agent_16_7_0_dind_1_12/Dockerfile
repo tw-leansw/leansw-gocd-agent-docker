@@ -13,8 +13,6 @@ ADD https://download.go.cd/binaries/16.7.0-3819/generic/go-agent-16.7.0-3819.zip
 
 WORKDIR /tmp
 RUN mkdir -p /etc/default/go-agent && unzip -j /tmp/go-agent.zip  -d /etc/default/go-agent
-RUN sed -i -e 's/DAEMON=Y/DAEMON=N/' /etc/default/go-agent
-
 RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 CMD ["/etc/default/go-agent/agent.sh"]
