@@ -6,7 +6,7 @@ ARG GO_VERSION=16.7.0-3819
 RUN rm -rf /etc/service/sshd /etc/my_init.d/00_regen_ssh_host_keys.sh
 RUN apk add --no-cache unzip openjdk7 git mercurial subversion dpkg
 
-RUN mkdir /etc/service/go-agent
+RUN mkdir -p /etc/service/go-agent
 ADD gocd-agent/go-agent-start.sh /etc/service/go-agent/run
 
 ADD https://download.go.cd/binaries/<%= ENV['GO_VERSION'] %>/deb/go-agent_<%= ENV['GO_VERSION'] %>_all.deb /tmp/go-agent.deb
