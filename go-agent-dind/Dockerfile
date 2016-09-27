@@ -6,8 +6,6 @@
 FROM docker:1.12.1-dind
 
 ARG GO_VERSION=16.9.0-4001
-
-ADD go-agent-start.sh /etc/service/go-agent/run
 WORKDIR /tmp
 
 RUN apk add --no-cache unzip openjdk7 git mercurial subversion bash wget && \ 
