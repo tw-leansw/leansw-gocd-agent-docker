@@ -18,4 +18,4 @@ RUN mkdir -p /etc/service/go-agent && \
 
 ADD .ssh /root/.ssh
 
-CMD bash -c 'setsid source /usr/local/bin/dockerd-entrypoint.sh && source /run/go-agent/agent.sh'
+CMD bash -c 'fork /usr/local/bin/dockerd-entrypoint.sh & && source /run/go-agent/agent.sh'
