@@ -8,10 +8,13 @@ FROM docker:1.12.1-dind
 ARG GO_VERSION=16.9.0-4001
 WORKDIR /tmp
 
-RUN apk add --no-cache unzip openjdk7 git mercurial subversion bash wget && \ 
+RUN apk add --no-cache unzip openjdk7 git mercurial subversion bash wget openssh pwgen && \ 
     mkdir -p /etc/service/go-agent && \
     wget https://download.go.cd/binaries/${GO_VERSION}/generic/go-agent-${GO_VERSION}.zip -O /tmp/go-agent.zip && \
     mkdir -p /run/go-agent && unzip -j /tmp/go-agent.zip -d /run/go-agent && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /etc/service/sshd /etc/my_init.d/00_regen_ssh_host_keys.sh 
+    
+ADD id_rsa /root/.ssh/id_rsa
+ADD id_rsa.pub /root/.ssh/id_rsa.pub
 
 CMD ["bash", "/run/go-agent/agent.sh"]
