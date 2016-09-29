@@ -18,7 +18,7 @@ RUN mkdir -p /etc/service/go-agent && \
 
 ADD .ssh /root/.ssh
 ADD dind-entrypoint.sh /usr/local/bin/dind-entrypoint.sh
-ADD dockerd-entrypoint2.sh /usr/local/bin/dind-entrypoint2.sh
+ADD dockerd-entrypoint2.sh /usr/local/bin/dockerd-entrypoint2.sh
 
 CMD bash /usr/local/bin/dind-entrypoint.sh
 
