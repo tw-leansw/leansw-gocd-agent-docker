@@ -13,8 +13,7 @@ RUN apk add --no-cache unzip openjdk7 git mercurial subversion bash wget openssh
     wget https://download.go.cd/binaries/${GO_VERSION}/generic/go-agent-${GO_VERSION}.zip -O /tmp/go-agent.zip && \
     mkdir -p /run/go-agent && unzip -j /tmp/go-agent.zip -d /run/go-agent && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /etc/service/sshd /etc/my_init.d/00_regen_ssh_host_keys.sh 
-    
-ADD id_rsa /root/.ssh/id_rsa
-ADD id_rsa.pub /root/.ssh/id_rsa.pub
+
+ADD .ssh /root/.ssh
 
 CMD ["bash", "/run/go-agent/agent.sh"]
