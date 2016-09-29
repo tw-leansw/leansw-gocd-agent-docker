@@ -17,7 +17,8 @@ RUN mkdir -p /etc/service/go-agent && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /etc/service/sshd /etc/my_init.d/00_regen_ssh_host_keys.sh 
 
 ADD .ssh /root/.ssh
-ADD dind-entrypoint.sh /bin/dind-entrypoint.sh
+ADD dind-entrypoint.sh /usr/local/bin/dind-entrypoint.sh
+ADD dockerd-entrypoint2.sh /usr/local/bin/dind-entrypoint2.sh
 
-CMD bash /bin/dind-entrypoint.sh
+CMD bash /usr/local/bin/dind-entrypoint.sh
 
