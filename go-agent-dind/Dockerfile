@@ -18,5 +18,5 @@ RUN mkdir -p /etc/service/go-agent && \
 
 ADD .ssh /root/.ssh
 
-CMD ["bash", "dockerd-entrypoint.sh", " && " ,"/run/go-agent/agent.sh"]
+CMD ["bash", "dockerd-entrypoint.sh", "&&", "bash" ,"/run/go-agent/agent.sh"]
 
