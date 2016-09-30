@@ -1,2 +1,2 @@
-FROM ubuntu:14.04.2
+FROM alpine
 VOLUME ["/var/lib/go-agent/pipelines", "/var/go/.m2"]
