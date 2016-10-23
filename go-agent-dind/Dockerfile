@@ -12,7 +12,7 @@ RUN apk add --no-cache unzip openjdk7 git mercurial subversion bash wget openssh
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /etc/service/sshd /etc/my_init.d/00_regen_ssh_host_keys.sh 
 
 RUN mkdir -p /etc/service/go-agent && \
-    wget http://artifactory.dev.twleansw.com:8081/artifactory/default-repo/tw-leansw/go-agent/${GO_VERSION}/go-agent-${GO_VERSION}.zip -O /tmp/go-agent.zip && \
+    wget http://artifactory.dev.twleansw.com:8081/artifactory/default-repo/tw-leansw/go-agent/go-agent-${GO_VERSION}.zip -O /tmp/go-agent.zip && \
     mkdir -p /run/go-agent && unzip -j /tmp/go-agent.zip -d /run/go-agent && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /etc/service/sshd /etc/my_init.d/00_regen_ssh_host_keys.sh 
 
