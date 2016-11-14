@@ -3,7 +3,7 @@
 # Usage:
 # docker run -d -e GO_SERVER=x.x.x.x registry.aliyuncs.com/leansw/gocd-agent-dind:16.9.0
 
-FROM docker:1.12.3
+FROM docker:1.10
 
 ARG GO_VERSION=16.9.0-4001
 WORKDIR /tmp
