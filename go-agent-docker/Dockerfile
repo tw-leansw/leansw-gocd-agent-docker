@@ -3,9 +3,9 @@
 # Usage:
 # docker run -d -e GO_SERVER=x.x.x.x registry.aliyuncs.com/leansw/gocd-agent-dind:16.9.0
 
-FROM docker:1.12.1-dind
+FROM docker:1.12.3
 
-ARG GO_VERSION=16.10.0-4131
+ARG GO_VERSION=16.9.0-4001
 WORKDIR /tmp
 
 RUN apk add --no-cache unzip openjdk7 git mercurial subversion bash wget openssh pwgen && \ 
@@ -17,8 +17,7 @@ RUN mkdir -p /etc/service/go-agent && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /etc/service/sshd /etc/my_init.d/00_regen_ssh_host_keys.sh 
 
 ADD .ssh /root/.ssh
-ADD dind-entrypoint.sh /usr/local/bin/dind-entrypoint.sh
-ADD dockerd-entrypoint2.sh /usr/local/bin/dockerd-entrypoint2.sh
+ADD remote-docker-entrypoint.sh /usr/local/bin/remote-docker-entrypoint.sh
 ADD autoregister.properties /run/go-agent/config/autoregister.properties
-CMD bash /usr/local/bin/dind-entrypoint.sh
+CMD bash /usr/local/bin/remote-docker-entrypoint.sh
 
