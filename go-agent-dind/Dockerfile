@@ -17,8 +17,9 @@ RUN mkdir -p /etc/service/go-agent && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /etc/service/sshd /etc/my_init.d/00_regen_ssh_host_keys.sh 
 
 ADD .ssh /root/.ssh
+ADD ca.crt /etc/docker/certs.d/reg.dev.twleansw.com/ca.crt
 ADD dind-entrypoint.sh /usr/local/bin/dind-entrypoint.sh
-ADD dockerd-entrypoint2.sh /usr/local/bin/dockerd-entrypoint2.sh
+ADD dockerd-entrypoint.sh /usr/local/bin/dockerd-entrypoint.sh
 ADD autoregister.properties /run/go-agent/config/autoregister.properties
 CMD bash /usr/local/bin/dind-entrypoint.sh
 
