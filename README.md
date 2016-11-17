@@ -1,7 +1,19 @@
-# gocd-agent-docker
-base on gocd-docker 16.2.1
-* jenv + java 1.8.0_71 + sonar_scanner 2.6.1 + maven 3.3.9
-* volume container for go_agent+maven
-* node 5.11.1
-* node 4.4.5
+# TW Leansw GoCD Agent Dockerfile
 
+## go-agent-dind
+
+This container will run another docker instance inside itself, which is considered as dind (docker in docker).
+
+Command to run an agent:
+```
+docker run -d --restart=always --name=gocd-agent-dind -l io.rancher.container.network=true -e GO_SERVER=<GoCD-Service-IP> registry.cn-hangzhou.aliyuncs.com/leansw/go_agent_dind:16.9.0-32
+```
+
+## go-agent-docker
+
+This container should run with the host docker sock file mounted inside.
+
+Command to run an agent:
+```
+docker run -d --restart=always --name=gocd-agent-docker -v /var/run/docker.sock:/var/run/docker.sock -l io.rancher.container.network=true -e GO_SERVER=<GoCD-Service-IP> registry.cn-hangzhou.aliyuncs.com/leansw/go_agent_docker:16.9.0-3
+```
