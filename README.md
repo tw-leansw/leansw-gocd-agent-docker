@@ -1,5 +1,9 @@
 # TW Leansw GoCD Agent Dockerfile
 
+Before you build the image, please put your ssh key (e.g. `id_rsa` and `id_rsa.pub`, for pulling code private git repository) into below folder:
+- go-agent-dind/ssh/
+- go-agent-docker/ssh/
+
 ## go-agent-dind
 
 This container will run another docker instance inside itself, which is considered as dind (docker in docker).

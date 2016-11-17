@@ -1,5 +1,5 @@
 # Image:
-# registry.aliyuncs.com/leansw/gocd-agent-dind:16.9.0-ssh
+# registry.aliyuncs.com/leansw/gocd-agent-dind:16.11.0
 # Usage:
 # docker run -d -e GO_SERVER=x.x.x.x registry.aliyuncs.com/leansw/gocd-agent-dind:16.11.0
 
@@ -17,7 +17,7 @@ RUN mkdir -p /etc/service/go-agent && \
     unzip -j /tmp/go-agent.zip -d /run/go-agent && \
     rm -rf /tmp/*
 
-ADD .ssh /root/.ssh
+ADD ssh /root/.ssh
 ADD ca.crt /etc/docker/certs.d/reg.dev.twleansw.com/ca.crt
 ADD dind-entrypoint.sh /usr/local/bin/dind-entrypoint.sh
 ADD dockerd-entrypoint.sh /usr/local/bin/dockerd-entrypoint.sh
