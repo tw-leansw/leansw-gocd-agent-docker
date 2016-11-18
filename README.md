@@ -10,7 +10,7 @@ This container will run another docker instance inside itself, which is consider
 
 Command to run an agent:
 ```
-docker run -d --restart=always --name=gocd-agent-dind -l io.rancher.container.network=true -e GO_SERVER=<GoCD-Service-IP> reg.dev.twleansw.com/leansw/gocd-agent-dind:16.11.0
+docker run -d --privileged --restart=always --name=gocd-agent-dind -l io.rancher.container.network=true -e GO_SERVER=<GoCD-Service-IP> reg.dev.twleansw.com/leansw/gocd-agent-dind:16.11.0
 ```
 
 ## go-agent-docker
