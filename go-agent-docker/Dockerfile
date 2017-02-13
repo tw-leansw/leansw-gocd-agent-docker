@@ -6,8 +6,9 @@
 FROM docker:1.12.3
 ARG GO_VERSION=16.11.0-4185
 WORKDIR /tmp
-
-RUN apk add --no-cache unzip openjdk7 git mercurial subversion bash wget openssh pwgen tzdata && \
+RUN
+RUN echo "ipv6" >> /etc/modules && \
+    apk add --no-cache unzip zip openjdk7 git mercurial subversion bash wget openssh pwgen tzdata && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /etc/service/sshd /etc/my_init.d/00_regen_ssh_host_keys.sh
 
 RUN mkdir -p /etc/service/go-agent && \
