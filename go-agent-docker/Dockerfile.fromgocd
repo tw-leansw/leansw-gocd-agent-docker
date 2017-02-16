@@ -14,5 +14,6 @@ RUN set -x \
 	&& docker -v
 ADD sources.list /etc/apt/sources.list
 RUN apt-get update && apt-get install -y wget zip
+ADD autoregister.properties /usr/share/go-agent/config/autoregister.properties
 
-CMD ["bash", "-c", "chmod 0666 /var/run/docker.sock; PRODUCTION_MODE=N /usr/share/go-agent/agent.sh"]
+CMD ["bash", "-c", "rm -rf /usr/share/go-agent/.agent-bootstrapper.running;chmod 0666 /var/run/docker.sock; PRODUCTION_MODE=N /usr/share/go-agent/agent.sh"]
