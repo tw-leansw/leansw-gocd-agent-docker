@@ -4,7 +4,7 @@
 # docker run -d -e GO_SERVER=x.x.x.x registry.aliyuncs.com/leansw/gocd-agent-docker:16.11.0
 
 FROM docker:1.12.3
-ARG GO_VERSION=16.11.0-4185
+ARG GO_VERSION=17.1.0-4511
 WORKDIR /tmp
 RUN echo "ipv6" >> /etc/modules && \
     apk add --no-cache unzip zip openjdk7 git mercurial subversion bash wget openssh pwgen tzdata && \
