@@ -12,5 +12,7 @@ RUN set -x \
 	&& rmdir docker \
 	&& rm docker.tgz \
 	&& docker -v
+ADD sources.list /etc/apt/sources.list
+RUN apt-get update && apt-get install -y wget zip
 
 CMD ["bash", "-c", "chmod 0666 /var/run/docker.sock; PRODUCTION_MODE=N /usr/share/go-agent/agent.sh"]
