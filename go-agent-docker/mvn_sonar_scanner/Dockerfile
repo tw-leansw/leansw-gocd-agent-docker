@@ -24,8 +24,9 @@ RUN dpkg -i /tmp/go-agent.deb \
     && rm -rf /tmp/* /var/tmp/*
 
 ENV DOCKERIZE_VERSION v0.3.0
+ARG DOCKERIZE_DOWNLOAD_URL="https://github.com/jwilder/dockerize/releases/download"
 RUN set -x \
-        && wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
+        && wget $DOCKERIZE_DOWNLOAD_URL/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
         && tar -C /usr/local/bin -xzvf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
         && rm dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
 
